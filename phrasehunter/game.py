@@ -3,12 +3,9 @@
 # interactions, getting a random phrase, checking for a win/loss state, and
 # removing "lives" or turns from the player
 
-# The class should include an initializer or def __init__ method that receives a phrases parameter and 
-# holds these phrases in an instance attribute on the game object.
-
 # You will likely need at least 1 instance attribute:
-#     An instance attribute that stores the current Phrase object for the start of the game. You may think of 
-#     this as the Active phrase being guessed against by the player while the game is running.
+#  An instance attribute that stores the current Phrase object for the start of the game. You may think of 
+#  this as the Active phrase being guessed against by the player while the game is running.
 
 # The Game instance might be responsible for things like: starting the game loop, getting player's 
 # input() guesses to pass to a Phrase object to perform its responsibilities against, determining if 
@@ -16,7 +13,8 @@
 import os
 import random
 
-from phrase import Phrase
+from .phrase import Phrase
+from .character import Character
 
 class Game:
     def __init__(self, phrases):
@@ -44,8 +42,8 @@ class Game:
         self.guesses.append(guess)
         return guess.lower()
     
-    def lives(self):
-        pass
+    # def lives(self):
+    #     pass
     
     def clear_screen(self):
         os.system("cls" if os.name == "nt" else "clear")
@@ -57,10 +55,15 @@ class Game:
         print("*" * len(welcome))
         print("Lives Left: {}".format(self.lives))
         print("Letters Guessed: {guesses}\n".format(guesses = self.guesses))
-        print(self.current_phrase)
+        self.current_phrase.display_phrase()
 
     def main_loop(self):
         self.clear_screen()
         self.welcome()
+        # While game isn't won
+        # prompt the user for a guess
+        # check the guess against phrase
+        self.get_guess()
+        print(self.guesses)
 
         

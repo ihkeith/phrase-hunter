@@ -1,6 +1,3 @@
-# Create your Character class logic in here.
-# create a Character class to help a Phrase determine how an individual character should display itself
-
 # The Character instance is responsible for holding the state of a given single character. You should ensure when you create
 # instances of Character() that you only pass a character that is a single character or len(char) == 1. Anything more or less
 # should be invalid and might cause you bugs in your code, especially if you are passing the user's input directly into the
