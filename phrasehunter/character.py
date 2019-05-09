@@ -12,9 +12,12 @@ class Character:
     # Have an attribute to store the original
         self.original = original
     # Have an attribute to store a bool of whether or not this letter has had a guess attempted against it
-        self.was_guessed = False
+        if self.original == ' ':
+            self.was_guessed = True
+        else:
+            self.was_guessed = False
 
-    def player_guess(self, guess):
+    def check_guess(self, guess):
     # take a single string char named guess as an arg
     # Update the was_guessed bool to True if guess == original
         self.guess = guess

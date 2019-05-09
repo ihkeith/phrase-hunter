@@ -13,6 +13,15 @@
 # The Game instance might be responsible for things like: starting the game loop, getting player's 
 # input() guesses to pass to a Phrase object to perform its responsibilities against, determining if 
 # a win/loss happens after the player runs out of turns or the phrase is completely guessed.
+import random
+
+import constants
+from character import Character
+from phrase import Phrase
 
 class Game:
-    pass
+    def __init__(self, phrase):
+        pass
+
+    def get_guess(self, guess):
+        pass

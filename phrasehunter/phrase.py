@@ -20,14 +20,14 @@ class Phrase:
     def __init__(self, phrase):
         self.phrase = [Character(letter) for letter in phrase]
     
-    def get_phrase(self):
-        return random.choice(constants.PHRASES)
-    
     def __iter__(self):
         yield from self.phrase
 
+    def get_phrase(self):
+        return random.choice(constants.PHRASES)
+
     def display_phrase(self):
         for letter in self.phrase:
-            print(letter, end=' ')
+                print(letter.show_guess, end=' ')
         print()
     
