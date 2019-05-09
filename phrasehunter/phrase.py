@@ -7,13 +7,10 @@
 
 # The instance method names and their implementation are up to you to determine.
 
-import random
-
-import constants
-from character import Character
-
 # The class should include an initializer or def __init__ that receives a phrase parameter and holds
 # this phrase in an instance attribute on the Phrase object.
+from character import Character
+
 class Phrase:
 #  A phrase should be a collection of Character objects,
 # where each letter of the phrase is a Character() instance stored inside a collection such as a List.
@@ -23,8 +20,8 @@ class Phrase:
     def __iter__(self):
         yield from self.phrase
 
-    def get_phrase(self):
-        return random.choice(constants.PHRASES)
+    # def get_phrase(self):
+    #     return random.choice(constants.PHRASES)
 
     def display_phrase(self):
         for letter in self.phrase:

@@ -1,6 +1,7 @@
-# Import your Game class
-from game import Game
-# Create your Dunder Main statement.
+from phrasehunter import constants
+from phrasehunter.game import Game
+# from phrasehunter.character import Character
+# from phrasehunter.phrase import Phrase
 
 # Inside Dunder Main:
 ## Create an instance of your Game class
@@ -18,4 +19,5 @@ from game import Game
 # of a Game class and method calls within that instance.
 
 if __name__ == '__main__':
-    pass
+    game = Game(constants.PHRASES)
+    game.main_loop()
