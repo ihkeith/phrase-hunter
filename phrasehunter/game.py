@@ -1,17 +1,18 @@
 import os
 import random
-import re
+import sys
+
 
 # https://stackoverflow.com/questions/4383571/importing-files-from-different-folder
 # And just like that, my imports stopped working. The link above helped resolve it
 from .phrase import Phrase
 from .character import Character
+from .constants import PHRASES
 
 class Game:
     def __init__(self, phrases):
         self.guesses = []
         self.phrases = phrases.copy()
-        # self.current_phrase, self.current_hint = Phrase(random.choice(phrases))
         self.current_phrase, self.current_hint = random.choice(phrases)
         self.current_phrase = Phrase(self.current_phrase)
         self.lives = 5
@@ -35,7 +36,7 @@ class Game:
             else:
                 guess = player_guess
         self.guesses.append(guess.lower())
-        if guess.lower() not in [letter.original for letter in self.current_phrase]:
+        if guess.lower() not in [letter.original.lower() for letter in self.current_phrase]:
             self.lives -= 1
         return guess.lower()
     
@@ -63,6 +64,15 @@ class Game:
         print()
         self.current_phrase.display_phrase()
 
+    def play_again(self, answer):
+        self.answer = answer
+        if self.answer.lower() == 'y':
+            return Game(PHRASES).main_loop()
+        else:
+            print("\nThank you for playing. Have a great day!")
+            self.clear_screen()
+            sys.exit()
+
     def main_loop(self):
         # While game isn't won
         while not self.game_won():
@@ -75,10 +85,12 @@ class Game:
             for item in self.current_phrase:
                 item.check_guess(player_guess)
             if self.lives == 0:
+                self.clear_screen()
                 self.welcome()
-                print("Oh no! You ran out of lives. Please try again later.")
+                self.play_again(input("Oh no! You ran out of lives. Would you like to play again? Y/n  "))
                 print()
                 break
+        self.play_again(input("Would you like to play again? Y/n  "))
 
 
         
