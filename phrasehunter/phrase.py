@@ -1,23 +1,19 @@
-# The Phrase instance might be responsible for things like: Knowing if the entire phrase has been guessed,
-# Iterating over its collection of Character to allow a guess to be checked using a Character instance
-# method call or to ask the Character object how it should show its letter.
-
-# The class should include an initializer or def __init__ that receives a phrase parameter and holds
-# this phrase in an instance attribute on the Phrase object.
-
 from .character import Character
 
 class Phrase:
-# A phrase should be a collection of Character objects,
-# where each letter of the phrase is a Character() instance stored inside a collection such as a List.
     def __init__(self, phrase):
         self.phrase = [Character(letter) for letter in phrase]
     
     def __iter__(self):
         yield from self.phrase
 
-    # def get_phrase(self):
-    #     return random.choice(constants.PHRASES)
+    def all_guessed(self):
+        guessed = []
+        for self.letter in self.phrase:
+            if self.letter.was_guessed:
+                guessed.append(self.letter)
+        if len(guessed) == len(self.phrase):
+            return True
 
     def display_phrase(self):
         for letter in self.phrase:
