@@ -12,9 +12,10 @@ from .constants import PHRASES
 class Game:
     def __init__(self, phrases):
         self.guesses = []
-        self.phrases = phrases.copy()
-        self.current_phrase, self.current_hint = random.choice(phrases)
-        self.current_phrase = Phrase(self.current_phrase)
+        self.phrases = [Phrase(phrase) for phrase in phrases.copy()]
+        self.current_phrase = random.choice(phrases)
+        # self.current_phrase, self.current_hint = random.choice(phrases)
+        # self.current_phrase = Phrase(self.current_phrase)
         self.lives = 5
 
     def get_guess(self):
@@ -60,7 +61,7 @@ class Game:
         print()
         print("Lives Left: {}".format(self.lives))
         print("Letters Guessed: {guesses}\n".format(guesses = self.guesses))
-        print("Hint: {}".format(self.current_hint))
+        print("Hint: {}".format(self.current_phrase.hint))
         print()
         self.current_phrase.display_phrase()
 
