@@ -13,29 +13,32 @@ class Game:
     def __init__(self, phrases):
         self.guesses = []
         self.phrases = [Phrase(phrase) for phrase in phrases.copy()]
-        self.current_phrase = random.choice(phrases)
-        # self.current_phrase, self.current_hint = random.choice(phrases)
-        # self.current_phrase = Phrase(self.current_phrase)
+        self.current_phrase = random.choice(self.phrases)
         self.lives = 5
 
     def get_guess(self):
         guess = ""
         while not guess:
-            player_guess = input("Please guess a letter: ")
-            if player_guess.isdigit():
-                print("That is not a valid guess.")
-                continue
-            elif len(player_guess) > 1:
-                print("That is not a valid guess.")
-                continue
-            elif not player_guess.isalpha():
-                print("That is not a valid guess.")
-                continue
-            elif player_guess.lower() in self.guesses:
-                print("You have already guessed that letter. Please try again")
-                continue
-            else:
-                guess = player_guess
+            try:
+                player_guess = input("Please guess a letter: ")
+                if player_guess.isdigit():
+                    print("That is not a valid guess.")
+                    continue
+                elif len(player_guess) > 1:
+                    print("That is not a valid guess.")
+                    continue
+                elif not player_guess.isalpha():
+                    print("That is not a valid guess.")
+                    continue
+                elif player_guess.lower() in self.guesses:
+                    print("You have already guessed that letter. Please try again")
+                    continue
+                else:
+                    guess = player_guess
+            except KeyboardInterrupt:
+                self.clear_screen()
+                self.welcome()
+                print("Nice try, but you can't leave without finishing the game.")
         self.guesses.append(guess.lower())
         if guess.lower() not in [letter.original.lower() for letter in self.current_phrase]:
             self.lives -= 1
@@ -70,8 +73,9 @@ class Game:
         if self.answer.lower() == 'y':
             return Game(PHRASES).main_loop()
         else:
-            print("\nThank you for playing. Have a great day!")
             self.clear_screen()
+            self.welcome()
+            print("\nThank you for playing. Have a great day!\n")
             sys.exit()
 
     def main_loop(self):
